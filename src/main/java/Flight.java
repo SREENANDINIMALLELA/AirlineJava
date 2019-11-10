@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class Flight {
     private ArrayList<Passenger>bookedPassengers ;
@@ -6,10 +8,11 @@ public class Flight {
     private String flightNumber ;
     private String destination;
     private String departureAirport;
-    private String departureTime ;
+    private Date departureTime ;
 
 
-    public Flight(Plane plane, String flightNumber, String destination, String departureAirport, String departureTime) {
+
+    public Flight(Plane plane, String flightNumber, String destination, String departureAirport, Date departureTime) {
         this.plane = plane;
         this.flightNumber = flightNumber;
         this.destination = destination;
@@ -36,21 +39,31 @@ public class Flight {
         return  totalCapacity;
     }
 
-   private void addPassenger(Passenger passenger1) {
-         bookedPassengers.add(passenger1);
-    }
-
     public void addBooking(ArrayList<Passenger> passengers) {
+        Random rand = new Random();
         if (getNumberOfSeatsAvailable() >= passengers.size()) {
-            bookedPassengers.addAll(passengers);
+            for (Passenger passenger : passengers){
+                bookedPassengers.add(passenger);
+                passenger.setBookedFlight(this);
+                passenger.setSeatNumber(rand.nextInt(getPlaneCapacity()));
+            }
         }
     }
+
+//    public void addBooking(Passenger passenger) {
+//        if (getNumberOfSeatsAvailable() != 0) {
+//                bookedPassengers.add(passenger);
+//                passenger.setBookedFlight(this);
+//            }
+//    }
     public double getPlaneWeight(){
         return plane.getPlaneType().getWeight();
     }
     public int getPlaneCapacity(){
         return plane.getPlaneType().getCapacity();
     }
-
+    public Date getDepartureTime(){
+        return departureTime;
+    }
 }
 

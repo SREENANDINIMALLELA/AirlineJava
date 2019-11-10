@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -15,7 +17,7 @@ public class FlightTest {
     @Before
     public void before() {
         plane = new Plane(PlaneType.BOEING737);
-        flight = new Flight(plane ,"BA123","Glagow","Hyderabad","15:20");
+        flight = new Flight(plane ,"BA123","Glagow","Hyderabad", Calendar.getInstance().getTime());
     }
     @Test
     public void startsWithEmptyPassengers(){
