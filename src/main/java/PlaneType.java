@@ -1,6 +1,6 @@
 public enum PlaneType {
-    BOEING747(50000,50),
-    BOEING737(40000,40);
+    BOEING747(1000,50),
+    BOEING737(3200,40);
 //    BOEING787(30000,30),
 //    BOEING767(20000,20),
 //    CESSNA172(10000,10),
@@ -9,15 +9,15 @@ public enum PlaneType {
 //    BOEING777(400,3);
 
 
-    private final int weight;
+    private final double weight;
     private final int capacity;
 
-    PlaneType(int weight, int capacity) {
+    PlaneType(double weight, int capacity) {
         this.weight = weight;
         this.capacity = capacity;
     }
 
-    public int getWeight(){
+    public double getWeight(){
         return  this.weight ;
     }
     public int getCapacity(){
