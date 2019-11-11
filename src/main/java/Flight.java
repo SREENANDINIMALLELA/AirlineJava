@@ -41,11 +41,13 @@ public class Flight {
 
     public void addBooking(ArrayList<Passenger> passengers) {
         Random rand = new Random();
+        int randNumber = rand.nextInt(getPlaneCapacity());
+
         if (getNumberOfSeatsAvailable() >= passengers.size()) {
             for (Passenger passenger : passengers){
                 bookedPassengers.add(passenger);
                 passenger.setBookedFlight(this);
-                passenger.setSeatNumber(rand.nextInt(getPlaneCapacity()));
+                passenger.setSeatNumber(getRandumNumber());
             }
         }
     }
@@ -62,8 +64,25 @@ public class Flight {
     public int getPlaneCapacity(){
         return plane.getPlaneType().getCapacity();
     }
-    public Date getDepartureTime(){
-        return departureTime;
+//    public Date getDepartureTime(){
+//        return departureTime;
+//    }
+
+    public int getRandumNumber(){
+        Random rand = new Random();
+        int randNumber = rand.nextInt(getPlaneCapacity());
+        boolean isDistinct = true;
+         for (Passenger passenger: bookedPassengers) {
+             if(passenger.getSeatNumber() == randNumber ){
+                 isDistinct = false;
+                 break;
+             }
+         }
+         if (isDistinct){
+             return randNumber;
+         } else {
+          return    getRandumNumber();
+         }
     }
 }
 
